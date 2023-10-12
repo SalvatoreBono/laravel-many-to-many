@@ -42,9 +42,6 @@ class ProjectController extends Controller
 
         $data["slug"] = $this->generateSlug($data["title"]);
 
-        // language viene trasformato in un array
-        $data["language"] = explode(",", $data["language"]);
-
         // per salvare quel file all’interno dello storage usiamo il comando Storage::put("sottocartella", $data["chiave_file"])
         $data["thumbnail"] = Storage::put("projects", $data["thumbnail"]);
 
@@ -100,9 +97,6 @@ class ProjectController extends Controller
         if ($data["title"] !== $project->title) {
             $data["slug"] = $this->generateSlug($data["title"]);
         }
-
-        // language viene trasformato in un array
-        $data["language"] = explode(",", $data["language"]);
 
 
         // se la thumbnail ha un valore cambia la thum  e viene chiamato il metodo delete della classe Storage per eliminare il file, altrimenti metti quella di prima 

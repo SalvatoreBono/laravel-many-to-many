@@ -14,7 +14,6 @@
             <div>{{ $project->type->type }}</div>
 
             {{--  "implode" unisce gli elementi dell'array in una singola stringa, separando ciascun elemento con il ", " --}}
-            <div>Linguaggi utilizzati: {{ implode(', ', $project['language']) }}</div>
             <a href="{{ route('admin.projects.edit', $project->slug) }}" class="btn btn-primary">Edit</a>
 
             {{--  Quando l'utente fa clic sul pulsante "Cancella", i dati del form verranno inviati con il method DELETE all'action destroy, consentendo di eliminare il progetto corrispondente --}}

@@ -11,7 +11,6 @@ class Project extends Model
     //specificare come i dati dovrebbero essere trattati
     protected $casts = [
         "date" => "date",
-        "language" => "array",
     ];
     //controllare quali dati possono essere inseriti o aggiornati 
     protected $fillable = [
@@ -21,7 +20,6 @@ class Project extends Model
         "thumbnail",
         "link",
         "date",
-        "language",
         "type_id",
     ];
 

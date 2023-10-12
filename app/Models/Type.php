@@ -8,9 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Type extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        "type",
-    ];
 
     // Questo metodo verrà utilizzato per accedere alla relazione tra il modello Type e il modello Project.
     public function projects()

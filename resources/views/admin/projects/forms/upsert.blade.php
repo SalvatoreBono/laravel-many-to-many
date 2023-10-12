@@ -73,18 +73,7 @@
                 <div class="invalid_feedback">{{ $message }}.</div>
             @enderror
         </div>
-        <div class="col-7">
-            <label for="inputLanguage" class="form-label">Linguaggi</label>
-            <input type="text"
-                class="form-control @error('language')
-                is-invalid
-            @enderror"
-                id="inputLanguage" name="language"
-                value="{{ old('language', implode(', ', $project?->language ?? [])) }}">
-            @error('language')
-                <div class="invalid_feedback">{{ $message }}</div>
-            @enderror
-        </div>
+
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Conferma</button>
             <a href="{{ $btnBack }}" class="btn btn-danger ">Indietro</a>

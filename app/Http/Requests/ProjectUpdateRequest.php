@@ -27,7 +27,6 @@ class ProjectUpdateRequest extends FormRequest
             "thumbnail" => "nullable|image|max:10240",
             "link" => "required|string|max:255",
             "date" => "required|date",
-            "language" => "required|string|max:255",
             "type_id" => "required|exists:types,id",
         ];
     }
@@ -41,8 +40,6 @@ class ProjectUpdateRequest extends FormRequest
             "link.required" => "Il campo del link è obbligatorio.",
             "link.max" => "Lunghezza massima superata.",
             "date.required" => "Il campo della data è obbligatorio.",
-            "language.required" => "Il campo dei linguaggi è obbligatorio.",
-            "language.max" => "Lunghezza massima superata.",
             "type_id.exists" => "Il campo della tipologia è obbligatorio.",
         ];
     }

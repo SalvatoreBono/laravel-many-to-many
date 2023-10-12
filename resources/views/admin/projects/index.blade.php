@@ -16,7 +16,6 @@
 
                     <div>{{ $project->type->type }}</div>
                     {{--  "implode" unisce gli elementi dell'array in una singola stringa, separando ciascun elemento con il ", " --}}
-                    <div>Linguaggi utilizzati: {{ implode(', ', $project['language']) }}</div>
                     <a href="{{ route('admin.projects.show', $project->slug) }}" class="btn btn-primary">Show</a>
                 </div>
             </div>
