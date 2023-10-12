@@ -10,7 +10,9 @@
 
             {{-- ->format('d/m/y') formattarla con il formato "giorno/mese/anno --}}
             <div>{{ $project['date']->format('d/m/y') }}</div>
-
+            @foreach ($project->technologies as $technology)
+                <div>{{ $technology->name }}</div>
+            @endforeach
             <div>{{ $project->type->type }}</div>
 
             {{--  "implode" unisce gli elementi dell'array in una singola stringa, separando ciascun elemento con il ", " --}}

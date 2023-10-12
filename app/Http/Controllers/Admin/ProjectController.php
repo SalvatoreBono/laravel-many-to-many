@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectStoreRequest;
 use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -28,8 +29,9 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
         //porta a una view per la creazione di un nuovo project
-        return view("admin.projects.create", compact("types"));
+        return view("admin.projects.create", compact("types", "technologies"));
     }
 
     /**
@@ -51,6 +53,12 @@ class ProjectController extends Controller
 
         // Il ::create esegue il fill e il save in un unico comando
         $project = Project::create($data);
+
+        // se l'array associativo $data contiene una chiave chiamata "technologies"
+        if (key_exists("technologies", $data)) {
+            //attach($data["technologies"]) = Operazione di "associamento" tra un progetto e un insieme di tecnologie
+            $project->technologies()->attach($data["technologies"]);
+        }
 
         //l'utente viene reindirizzato a un'altra pagina
         return redirect()->route("admin.projects.show", $project->slug);
@@ -76,11 +84,13 @@ class ProjectController extends Controller
     {
         $types = Type::all();
 
+        $technologies = Technology::all();
+
         //una query dove lo slug corrispondente a $slug
         $project = Project::where("slug", $slug)->first();
 
         //porta a una view per la modifica di un project
-        return view("admin.projects.edit", compact("project", "types"));
+        return view("admin.projects.edit", compact("project", "types", "technologies"));
     }
 
     /**
@@ -107,6 +117,8 @@ class ProjectController extends Controller
             $data["thumbnail"] =  $project["thumbnail"];
         }
 
+        /*sync($data["technologies"] =  Le relazioni esistenti tra il progetto e le tecnologie verranno rimosse, e poi saranno create nuove relazioni con le tecnologie specificate in $data["technologies"]. */
+        $project->technologies()->sync($data["technologies"]);
 
         // update fa un fill() + save()
         $project->update($data);
@@ -126,6 +138,10 @@ class ProjectController extends Controller
         if ($project["thumbnail"]) {
             Storage::delete($project["thumbnail"]);
         }
+
+        //detach() senza argomenti, l'effetto è quello di rimuovere tutte le relazioni tra il progetto e le tecnologie associate.
+        $project->technologies()->detach();
+
         //Il metodo delete() elimina il singolo project associato
         $project->delete();
 

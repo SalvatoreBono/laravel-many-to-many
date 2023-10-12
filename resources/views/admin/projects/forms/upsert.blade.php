@@ -47,6 +47,9 @@
                 <div class="invalid_feedback">{{ $message }}</div>
             @enderror
         </div>
+        <div>
+
+        </div>
         <div class="col-2">
             <label for="inputDate" class="form-label">Data</label>
             <input type="date" class="form-control @error('date')
@@ -73,7 +76,26 @@
                 <div class="invalid_feedback">{{ $message }}.</div>
             @enderror
         </div>
-
+        <div class="col-12">
+            <label class="form-check-label" for="gridCheck">
+                Linguaggi utilizzati
+            </label>
+            <div>
+                @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline @error('technologies') is-invalid @enderror">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" name="technologies[]"
+                            {{ $project?->technologies->contains($technology) ? 'checked' : '' }}
+                            value="{{ $technology->id }}">
+                        <label class="form-check-label" for="gridCheck">
+                            {{ $technology->name }}
+                        </label>
+                    </div>
+                @endforeach
+                @error('technologies')
+                    <div class="invalid_feedback">{{ $message }}.</div>
+                @enderror
+            </div>
+        </div>
         <div class="col-12">
             <button type="submit" class="btn btn-primary">Conferma</button>
             <a href="{{ $btnBack }}" class="btn btn-danger ">Indietro</a>

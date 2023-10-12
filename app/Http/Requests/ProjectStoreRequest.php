@@ -29,6 +29,7 @@ class ProjectStoreRequest extends FormRequest
             "date" => "required|date",
             //exists: si assicura che l'id passato esista nella tabella types nella colonna id
             "type_id" => "required|exists:types,id",
+            "technologies" => "required",
         ];
     }
     public function messages()
@@ -43,6 +44,7 @@ class ProjectStoreRequest extends FormRequest
             "link.max" => "Lunghezza massima superata.",
             "date.required" => "Il campo della data è obbligatorio.",
             "type_id.exists" => "Il campo della tipologia è obbligatorio.",
+            "technologies.required" => "Scegli almeno un linguaggio",
         ];
     }
 }

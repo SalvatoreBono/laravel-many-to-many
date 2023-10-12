@@ -15,7 +15,6 @@
         'action' => route('admin.projects.update', $project->slug),
         'method' => 'PUT',
         'project' => $project,
-        'types' => $types,
         'btnBack' => route('admin.projects.show', $project->slug),
     ])
 @endsection
